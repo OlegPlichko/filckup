@@ -195,7 +195,9 @@ class Phockup:
         patternImage = re.compile('^(image/.+|application/vnd.adobe.photoshop)$')
         if patternImage.match(mimetype):
             return 'image'
-
+        patternAudio = re.compile('^(audio/.*')
+        if patternAudio.match(mimetype):
+            return 'audio'
         patternVideo = re.compile('^(video/.*)$')
         if patternVideo.match(mimetype):
             return 'video'
@@ -384,7 +386,7 @@ but looking for '{self.file_type}'"
             target_file_type = self.get_file_type(exif_data['MIMEType'])
 
         date = None
-        if target_file_type in ['image', 'video']:
+        if target_file_type in ['image', 'video', 'audio']:
             date = Date(filename).from_exif(exif_data, self.timestamp, self.date_regex,
                                             self.date_field)
             output = self.get_output_dir(date)
