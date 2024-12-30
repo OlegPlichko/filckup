@@ -195,9 +195,6 @@ class Phockup:
         patternImage = re.compile('^(image/.+|application/vnd.adobe.photoshop)$')
         if patternImage.match(mimetype):
             return 'image'
-        patternAudio = re.compile('^(audio/.*')
-        if patternAudio.match(mimetype):
-            return 'audio'
         patternVideo = re.compile('^(video/.*)$')
         if patternVideo.match(mimetype):
             return 'video'
