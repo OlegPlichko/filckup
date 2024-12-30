@@ -1,5 +1,6 @@
 from phockup import Phockup
 import re
+import os
 
 class Filckup(Phockup):
     def get_file_type(self, mimetype):
