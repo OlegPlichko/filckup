@@ -4,6 +4,16 @@ import os
 from src.exif import Exif
 from src.date import Date
 
+CATEGORIES = {
+    'documents': ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
+                  'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 
+                  'text/plain', 'text/csv'],
+    'media': ['image/jpeg', 'image/png', 'image/gif', 'audio/mpeg', 'video/mp4', 'video/x-msvideo'],
+    'executables': ['application/x-msdownload', 'application/x-executable', 'application/x-sh'],
+    'archives': ['application/zip', 'application/x-rar-compressed', 'application/x-tar'],
+    'game_assets': ['application/octet-stream'],  # Placeholder for game assets
+}
+
 class Filckup(Phockup):
     def get_file_type(self, mimetype):
         """
@@ -11,6 +21,9 @@ class Filckup(Phockup):
         Return None if other
         Use mimetype to determine if the file is an image or video.
         """
+        for result, mimetypes in CATEGORIES.items():
+            if mimetype in mimetypes:
+                return result
         patternImage = re.compile('^(image/.+|application/vnd.adobe.photoshop)$')
         if patternImage.match(mimetype):
             return 'image'
