@@ -1,6 +1,8 @@
 from phockup import Phockup
 import re
 import os
+from src.exif import Exif
+from src.date import Date
 
 class Filckup(Phockup):
     def get_file_type(self, mimetype):
