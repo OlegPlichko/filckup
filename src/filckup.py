@@ -81,7 +81,7 @@ class Filckup(Phockup):
                 exif_data = Exif(filename).data()
             date = Date(filename).from_exif(exif_data, self.timestamp, self.date_regex,
                                             self.date_field)
-            output = self.get_output_dir(date)
+            output = self.get_output_dir(date, target_file_type)
             target_file_name = self.get_file_name(filename, date)
             if not self.original_filenames:
                 target_file_name = target_file_name.lower()

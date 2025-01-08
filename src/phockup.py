@@ -200,7 +200,7 @@ class Phockup:
             return 'video'
         return None
 
-    def get_output_dir(self, date, target_file_type):
+    def get_output_dir(self, date, target_file_type=None):
         """
         Generate output directory path based on the extracted date and
         formatted using dir_format.
@@ -212,13 +212,13 @@ class Phockup:
                     self.output_prefix,
                     date['date'].date().strftime(self.dir_format),
                     self.output_suffix]
-            if target_file_type:
-                path.insert(1, target_file_type)
         except (TypeError, ValueError):
             path = [self.output_dir,
                     self.output_prefix,
                     self.no_date_dir,
                     self.output_suffix]
+        if target_file_type:
+            path.insert(1, target_file_type)
         # Remove any None values that made it in the path
         path = [p for p in path if p is not None]
         fullpath = os.path.normpath(os.path.sep.join(path))
