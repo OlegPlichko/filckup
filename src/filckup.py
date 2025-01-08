@@ -64,6 +64,7 @@ class Filckup(Phockup):
         Returns target file name and path
         """
         target_file_type = None
+        exif_data = None
 
         guess = self.magika.identify_path(pathlib.Path(filename))
         if guess:
@@ -76,6 +77,8 @@ class Filckup(Phockup):
 
         date = None
         if target_file_type in ['image', 'video', 'audio']:
+            if exif_data is None:
+                exif_data = Exif(filename).data()
             date = Date(filename).from_exif(exif_data, self.timestamp, self.date_regex,
                                             self.date_field)
             output = self.get_output_dir(date)
